@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import config from '../../../config';
 import qs from 'querystring';
+import store from '../../../redux/store';
 
 const { api } = config;
 
@@ -18,7 +19,7 @@ async function getToken() {
       },
     }
   );
-  return token;
+  store.dispatch({ type: 'SET_TOKEN', payload: token });
 }
 
 export { getToken };
