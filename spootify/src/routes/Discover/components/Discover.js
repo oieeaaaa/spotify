@@ -1,40 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import DiscoverBlock from './DiscoverBlock/components/DiscoverBlock';
 import '../styles/_discover.scss';
+import { useSelector } from 'react-redux';
 
-export default class Discover extends Component {
-  constructor() {
-    super();
+const Discover = () => {
+  const { discover, token } = useSelector((state) => state);
+  const { newReleases, playlists, categories } = discover;
 
-    this.state = {
-      newReleases: [],
-      playlists: [],
-      categories: [],
-    };
-  }
-
-  render() {
-    const { newReleases, playlists, categories } = this.state;
-
-    return (
-      <div className="discover">
-        <DiscoverBlock
-          text="RELEASED THIS WEEK"
-          id="released"
-          data={newReleases}
-        />
-        <DiscoverBlock
-          text="FEATURED PLAYLISTS"
-          id="featured"
-          data={playlists}
-        />
-        <DiscoverBlock
-          text="BROWSE"
-          id="browse"
-          data={categories}
-          imagesKey="icons"
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="discover">
+      <DiscoverBlock
+        text="RELEASED THIS WEEK"
+        id="released"
+        data={newReleases}
+      />
+      <DiscoverBlock text="FEATURED PLAYLISTS" id="featured" data={playlists} />
+      <DiscoverBlock
+        text="BROWSE"
+        id="browse"
+        data={categories}
+        imagesKey="icons"
+      />
+    </div>
+  );
+};
+export default Discover;
