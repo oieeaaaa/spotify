@@ -30,4 +30,17 @@ async function handleRequest(path) {
   return res;
 }
 
-export { getToken, handleRequest };
+async function handleMultipleRequests(requests) {
+  return axios
+    .all(requests)
+    .then(
+      axios.spread((...responses) => {
+        return responses;
+      })
+    )
+    .catch((errors) => {
+      throw errors;
+    });
+}
+
+export { getToken, handleRequest, handleMultipleRequests };
