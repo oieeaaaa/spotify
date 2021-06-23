@@ -22,4 +22,12 @@ async function getToken() {
   store.dispatch({ type: 'SET_TOKEN', payload: token });
 }
 
-export { getToken };
+async function handleRequest(path) {
+  const token = store.getState().token;
+  const res = await axios.get(`${api.baseUrl}/${path}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res;
+}
+
+export { getToken, handleRequest };
